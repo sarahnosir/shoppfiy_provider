@@ -1,0 +1,74 @@
+{
+    "products": [
+        {
+            "id": "1",
+            "name": "bag",
+            "categoryId": "1",
+            "description": "good material",
+            "price": 20,
+            "quantity": 12,
+            "image": "assets/images/pngwing.com (1).png"
+        },
+        {
+            "id": "2",
+            "name": "shoes",
+            "categoryId": "1",
+            "description": "good material",
+            "price": 33,
+            "quantity": 5,
+            "image": "assets/images/pngwing.com.png"
+        },
+        {
+            "id": "3",
+            "name": "shoes",
+            "categoryId": "1",
+            "description": "good material",
+            "price": 300,
+            "quantity": 5,
+            "image": "assets/images/pngwing.com (2).png"
+        },
+        {
+            "id": "3",
+            "name": "wallet",
+            "categoryId": "1",
+            "description": "good material",
+            "price": 400,
+            "quantity": 5,
+            "image": "assets/images/pngwing.com(3).png"
+        }
+    ],
+    "categories": [
+        {
+            "id": "1",
+            "title": "new clothes",
+            "description": "clother Category"
+        },
+        {
+            "id": "2",
+            "title": "Assets",
+            "description": "assets Category"
+        }
+    ],
+    "advertisements": [
+        {
+            "id": "1",
+            "title": "Discover the perfect blend ",
+            "imgpath": "assets/images/img1.jpg"
+        },
+        {
+            "id": "2",
+            "title": "Step into the spotlight ",
+            "imgpath": "assets/images/img2.jpg"
+        },
+        {
+            "id": "3",
+            "title": "Unleash your inner style ",
+            "imgpath": "assets/images/img3.jpg"
+        },
+        {
+            "id": "4",
+            "title": "Embrace your individuality ",
+            "imgpath": "assets/images/img4.jpg"
+        }
+    ]
+}
