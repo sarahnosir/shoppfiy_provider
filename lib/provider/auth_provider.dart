@@ -66,7 +66,9 @@ class AppAuthProvider extends ChangeNotifier {
               context, MaterialPageRoute(builder: (_) => const MasterPage()));
         } else {}
       } on FirebaseAuthException catch (e) {
+        print(e);
         if (e.code == 'user-not-found') {
+          print("not found");
           QuickAlert.show(
             context: context,
             type: QuickAlertType.error,
@@ -81,7 +83,14 @@ class AppAuthProvider extends ChangeNotifier {
             text: 'Sorry, Worng Password',
           );
         }
-      } catch (e) {}
+      } catch (e) {
+        QuickAlert.show(
+          context: context,
+          type: QuickAlertType.error,
+          title: 'Oops...',
+          text: 'Sorry, something went worng ',
+        );
+      }
     }
   }
 
