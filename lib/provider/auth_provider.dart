@@ -1,18 +1,30 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:quickalert/quickalert.dart';
 
-class AuthProvider extends ChangeNotifier {
+import '../pages/master_page.dart';
+
+class AppAuthProvider extends ChangeNotifier {
   late TextEditingController emailController;
   late TextEditingController passwordController;
   late TextEditingController userNameController;
   late GlobalKey<FormState> formKey;
   bool obscureText = true;
-  AuthProvider() {
+
+  void init() {
     formKey = GlobalKey();
     emailController = TextEditingController();
     passwordController = TextEditingController();
     userNameController = TextEditingController();
   }
+
+  void providerdispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    userNameController.dispose();
+  }
+
   String? passwordValidation() {
     String value = passwordController.text;
     if (value == '') {
@@ -29,23 +41,82 @@ class AuthProvider extends ChangeNotifier {
     if (value == '') {
       return 'email is required';
     }
-    if (!EmailValidator.validate(value)) {
-      return 'Enter Valid Email';
+    if (!EmailValidator.validate(value) &&
+        value.split('@').last.contains('gmail')) {
+      return 'Enter Valid Gmail';
     }
+
     return null;
   }
 
-  bool togglevisbilty() {
-    return obscureText = !obscureText;
+  void togglevisbilty() {
+    obscureText = !obscureText;
+    notifyListeners();
   }
 
-  void togglevisbiltyIcon() {
-    IconData icon;
-    if (obscureText == true) {
-      icon = Icons.visibility_off;
-    } else {
-      icon = Icons.visibility;
+  Future<void> login(BuildContext context) async {
+    if ((formKey.currentState?.validate() ?? false)) {
+      try {
+        var credintials = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(
+                email: emailController.text, password: passwordController.text);
+
+        if (credintials.user != null) {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (_) => const MasterPage()));
+        } else {}
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'user-not-found') {
+          QuickAlert.show(
+            context: context,
+            type: QuickAlertType.error,
+            title: 'Oops...',
+            text: 'Sorry, user not found',
+          );
+        } else if (e.code == 'wrong-password') {
+          QuickAlert.show(
+            context: context,
+            type: QuickAlertType.error,
+            title: 'Oops...',
+            text: 'Sorry, Worng Password',
+          );
+        }
+      } catch (e) {}
     }
-    notifyListeners();
+  }
+
+  Future<void> signUp(BuildContext context) async {
+    if ((formKey.currentState?.validate() ?? false)) {
+      try {
+        var credintials = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(
+                email: emailController.text, password: passwordController.text);
+        QuickAlert.show(
+          context: context,
+          type: QuickAlertType.success,
+          title: '',
+          text: 'Sorry, use a different email',
+        );
+        if (credintials.user != null) {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (_) => const MasterPage()));
+        } else {}
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'email-already-in-use') {
+          QuickAlert.show(
+            context: context,
+            type: QuickAlertType.error,
+            title: 'Oops...',
+            text: 'Sorry, use a different email',
+          );
+        } else if (e.code == 'weak-password') {}
+      } catch (e) {
+        QuickAlert.show(
+          context: context,
+          type: QuickAlertType.warning,
+          text: 'Weak Password',
+        );
+      }
+    }
   }
 }

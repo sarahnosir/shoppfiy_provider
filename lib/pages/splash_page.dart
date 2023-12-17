@@ -1,7 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shopify_app/pages/master_page.dart';
-
-import 'package:shopify_app/services/prefrences.service.dart';
 
 import 'authpage.dart';
 
@@ -20,17 +19,15 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   void checkUser() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    var result = PrefrencesService.prefs?.get('user');
-    if (context.mounted) {
-      if (result != null) {
+    FirebaseAuth.instance.authStateChanges().listen((user) {
+      if (user == null) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => const MasterPage()));
       } else {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (_) => AuthPage()));
       }
-    }
+    });
   }
 
   @override
