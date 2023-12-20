@@ -1,21 +1,21 @@
-class Advertisement {
+class Ads {
   String? id;
   String? title;
-  String? imgpath;
+  String? picture;
 
-  Advertisement();
-  Advertisement.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+  Ads();
+
+  Ads.fromJson(Map<String, dynamic> json, String docId) {
+    id = docId;
     title = json['title'];
-    imgpath = json['imgpath'];
+    picture = json['picture'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['id'] = id;
     data['title'] = title;
-    data['imgpath'] = imgpath;
-
+    data['picture'] = picture;
     return data;
   }
 }

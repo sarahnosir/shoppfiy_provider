@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shopify_app/models/adver.model.dart';
-
-import 'custom_button.dart';
+import '../custom_button.dart';
 
 class CarouselWidget extends StatelessWidget {
-  final Advertisement adverItem;
+  final Ads adverItem;
   const CarouselWidget({
     super.key,
     required this.adverItem,
@@ -29,7 +28,7 @@ class CarouselWidget extends StatelessWidget {
         child: Stack(
           children: [
             Image.asset(
-              adverItem.imgpath ?? 'assets/images/img1.jpg',
+              adverItem.picture ?? 'assets/images/img1.jpg',
               height: 200,
               width: double.infinity,
               fit: BoxFit.cover,

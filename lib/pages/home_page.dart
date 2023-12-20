@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shopify_app/models/adver.model.dart';
-import 'package:shopify_app/widgets/carousel_slider_ex.widget.dart';
+import 'package:shopify_app/provider/home_provider.dart';
+import 'package:shopify_app/widgets/home/carousel_slider_ex.widget.dart';
 import 'package:shopify_app/widgets/headline.widget.dart';
 import 'package:shopify_app/widgets/home/categories_row.home.widget.dart';
 import '../models/product.model.dart';
-import '../widgets/carouselwidget.dart';
-import '../widgets/prodouct_card.dart';
+import '../widgets/home/carouselwidget.dart';
+import '../widgets/home/prodouct_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,15 +24,15 @@ class _HomePageState extends State<HomePage> {
             child: Column(children: [
           HeadlineWidget(title: 'Categories'),
           CategoriesRowHome(),
-          Consumer<List<Advertisement>?>(
+          Consumer<HomeProvider>(
             builder: (context, advertisements, child) {
               if (advertisements == null) {
                 return CircularProgressIndicator();
-              } else if (advertisements.isEmpty) {
+              } else if (advertisements.adList == null) {
                 return Text('No Data Found');
               } else {
                 return CarouselSliderWithIndicator(
-                  items: advertisements
+                  items: advertisements.adList!
                       .map((e) => CarouselWidget(
                             adverItem: e,
                           ))

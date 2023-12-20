@@ -40,7 +40,7 @@ class _CarouselSliderWithIndicatorState
                 enlargeFactor: 0.15),
             items: widget.items),
         DotsIndicator(
-          dotsCount: 4,
+          dotsCount: 2,
           position: currentPosition,
           decorator: DotsDecorator(
             size: const Size.square(9.0),
