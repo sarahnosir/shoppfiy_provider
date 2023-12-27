@@ -10,9 +10,7 @@ class ForgetPasswordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
-            // color: Colors.red,
-            child: const Padding(
+        const Padding(
           padding: EdgeInsets.fromLTRB(50, 40, 50, 20),
           child: Text(
               maxLines: 3,
@@ -22,7 +20,7 @@ class ForgetPasswordPage extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
               'Enter the email address you used to create your account and we will email you a link to reset your password'),
-        )),
+        ),
         Padding(
           padding: const EdgeInsets.all(30.0),
           child: Column(

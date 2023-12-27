@@ -3,6 +3,7 @@ import 'package:shopify_app/utils/colors.util.dart';
 
 class AppBarEx {
   static PreferredSizeWidget get getAppBar => AppBar(
+        backgroundColor: Color.fromARGB(250, 246, 248, 255),
         actions: [
           Stack(
             children: [

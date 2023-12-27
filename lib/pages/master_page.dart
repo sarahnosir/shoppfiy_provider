@@ -4,6 +4,8 @@ import 'package:line_icons/line_icons.dart';
 import 'package:shopify_app/pages/home_page.dart';
 import 'package:shopify_app/widgets/app_bar_ex.widget.dart';
 
+import 'profile_page.dart';
+
 class MasterPage extends StatefulWidget {
   const MasterPage({
     super.key,
@@ -21,9 +23,7 @@ class _MasterPageState extends State<MasterPage> {
     Text(
       'Categories Page',
     ),
-    Text(
-      'Profile Page',
-    ),
+    ProfilePage(),
     Text(
       'Cart Page',
     ),
@@ -31,6 +31,7 @@ class _MasterPageState extends State<MasterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(250, 246, 248, 255),
       // floatingActionButton: FloatingActionButton(
       //   onPressed: () {},
       //   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
@@ -42,7 +43,6 @@ class _MasterPageState extends State<MasterPage> {
           _selectedIndex = index;
           setState(() {});
         },
-        backgroundColor: Colors.black.withOpacity(.002),
         elevation: 0,
         gapLocation: GapLocation.none,
         notchSmoothness: NotchSmoothness.smoothEdge,
